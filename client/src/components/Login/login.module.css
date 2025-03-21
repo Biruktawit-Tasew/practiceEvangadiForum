@@ -105,6 +105,7 @@
 .eye {
   position: absolute;
   right: 0;
+  margin-right: 15px;
   top: 14px;
   color: #eac0c1;
 }

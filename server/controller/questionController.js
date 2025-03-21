@@ -19,6 +19,7 @@ async function allQuestions(req, res) {
         const content = question.description;
         const userId = question.user_id;
         const createdAt = question.created_at;
+        const tag = question.tag;
         const [singleUser] = await db.query(
           "SELECT username FROM registration WHERE user_id=?",
           [userId]
@@ -32,6 +33,7 @@ async function allQuestions(req, res) {
           content: content,
           user_name: username,
           created_at: createdAt,
+          tag: tag,
         };
       })
     );

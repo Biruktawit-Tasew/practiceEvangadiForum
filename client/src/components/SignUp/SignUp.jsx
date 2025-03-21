@@ -228,9 +228,9 @@ const SignUp = ({ toggleAuth }) => {
             }}
           >
             {showPassword ? (
-              <FaEye size={34} style={{ color: "#eac0c1" }} />
+              <FaEye size={25} style={{ color: "#eac0c1",marginRight:"20px" , marginTop: "5px"}} />
             ) : (
-              <FaEyeSlash size={34} style={{ color: "#eac0c1" }} />
+              <FaEyeSlash size={25} style={{ color: "#eac0c1",marginRight:"20px" , marginTop: "5px"}} />
             )}
           </span>
         </div>

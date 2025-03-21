@@ -45,7 +45,7 @@ function LogIn({ toggleAuth }) {
       <div className={styles.login__container}>
         <h1>Login to your account</h1>
         <div className={styles.signup}>
-          Don’t have an account?
+          Don’t have an account?{" "}
           <Link onClick={toggleAuth} className={styles.toggleButton}>
             Create a new account
           </Link>
@@ -75,9 +75,9 @@ function LogIn({ toggleAuth }) {
             />
             <div onClick={togglePasswordVisibility}>
               {passwordVisible ? (
-                <BiShow size={34} className={styles.eye} />
+                <BiShow size={30} className={styles.eye} />
               ) : (
-                <BiSolidHide size={34} className={styles.eye} />
+                <BiSolidHide size={30} className={styles.eye} />
               )}
             </div>
           </div>
