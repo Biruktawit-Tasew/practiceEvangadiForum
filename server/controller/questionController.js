@@ -4,7 +4,9 @@ const keywords = require("../Utility/keywords");
 const db = require("../db/dbConfig");
 async function allQuestions(req, res) {
   try {
-    const [question] = await db.query("SELECT * FROM questions");
+    const [question] = await db.query(
+      "SELECT * FROM questions ORDER BY id DESC"
+    );
     if (question.length == 0) {
       return res
         .status(StatusCodes.NOT_FOUND)
@@ -26,7 +28,6 @@ async function allQuestions(req, res) {
         );
         const username =
           singleUser.length > 0 ? singleUser[0].username : "Unkown User";
-        console.log(username);
         return {
           question_id: questionId,
           title: title,
