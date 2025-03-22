@@ -7,7 +7,7 @@ export const AppState = createContext();
 function App() {
   const [user, setUser] = useState({});
   const token = localStorage.getItem("token");
-  console.log(token);
+  // console.log(token);
   async function checkUser() {
     try {
       const { data } = await axios.get("/users/check", {
@@ -15,12 +15,12 @@ function App() {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(data);
+      // console.log(data);
       setUser(data);
-      console.log(user);
+      // console.log(user);
       localStorage.setItem("user", JSON.stringify(data));
     } catch (error) {
-      console.log(error.response);
+      // console.log(error.response);
       localStorage.removeItem("user");
       setUser({});
     }

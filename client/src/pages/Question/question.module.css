@@ -81,6 +81,7 @@ button {
   font-weight: bold;
   color: #fff;
   background: var(--old-button-color);
+  
   border: none;
   border-radius: 8px;
   cursor: pointer;

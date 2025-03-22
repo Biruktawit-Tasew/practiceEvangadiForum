@@ -3,14 +3,21 @@ import EvangadiLogo from "../../assets/black-logo.png";
 import styles from "./header.module.css";
 import { Link } from "react-router-dom";
 import { AppState } from "../../App";
+import { useNavigate } from "react-router-dom";
 const Header = () => {
-  const { user } = useContext(AppState);
-
+  const { user, setUser } = useContext(AppState);
+  const navigate = useNavigate();
+  function handleSignOut() {
+    setUser({});
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/");
+  }
   return (
     <div className={styles.header}>
       <div className={styles.header_container}>
         <div className={styles.header_logo}>
-          <Link to="/">
+          <Link to="/home">
             <img src={EvangadiLogo} alt="img" />
           </Link>
         </div>
@@ -18,18 +25,24 @@ const Header = () => {
           <nav className="right">
             <ul>
               <li className={styles.home}>
-                <Link to="/">Home</Link>
+                <Link to={user.username ? "/home" : "/"}>Home</Link>
               </li>
               <li className={styles.work}>
                 <Link to="/howItWorks">How it Works</Link>
               </li>
-              <Link
-                to={user ? "/" : "https://www.evangadi.com/"}
-                target="_blank"
-                className={styles.button}
-              >
-                {user ? "SIGN OUT" : "JOIN THE COMMUNITY"}
-              </Link>
+              {user.username ? (
+                <Link to="/" className={styles.button} onClick={handleSignOut}>
+                  SIGN OUT
+                </Link>
+              ) : (
+                <Link
+                  to="https://www.evangadi.com/"
+                  className={styles.join}
+                  target="_blank"
+                >
+                  JOIN THE COMMUNITY
+                </Link>
+              )}
             </ul>
           </nav>
         </div>

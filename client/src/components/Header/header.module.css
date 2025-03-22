@@ -48,7 +48,7 @@
   border-radius: 5px;
 }
 /* Button Styling */
-.button {
+.button,.join {
 
   background-color: #0079fa;
   color: white;
@@ -62,9 +62,11 @@
   text-decoration: none;
 }
 
-.button:hover {
-  background-color: #c1d6f0;
+.button:hover, .join:hover{
+  /* background-color:var(--shade-color); */
+  background: #fff;
   color: #047af8;
+  outline:1px solid #047af8;
 }
 
 .button:active {
