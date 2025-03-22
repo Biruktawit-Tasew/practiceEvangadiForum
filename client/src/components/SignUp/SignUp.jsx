@@ -103,15 +103,22 @@ const SignUp = ({ toggleAuth }) => {
     try {
       console.log(formData);
       const response = await axios.post("/users/register", formData);
-      setSuccessMessage(response.data.message);
+      setSuccessMessage(response.data.msg);
       setErrors({});
-
-      setTimeout(() => {
-        navigate("/home");
-      }, 2000);
+      if (response) {
+        const { data } = await axios.post("/users/login", {
+          email: formData.email,
+          password: formData.password,
+        });
+        console.log(data.token);
+        localStorage.setItem("token", data.token);
+        setTimeout(() => {
+          navigate("/home");
+        }, 2000);
+      }
     } catch (err) {
       if (err.response) {
-        setErrors({ api: err.response.data.error });
+        setErrors({ api: err.response.data.msg });
       } else {
         setErrors({ api: "An error occurred. Please try again." });
       }
@@ -228,9 +235,23 @@ const SignUp = ({ toggleAuth }) => {
             }}
           >
             {showPassword ? (
-              <FaEye size={25} style={{ color: "#eac0c1",marginRight:"20px" , marginTop: "5px"}} />
+              <FaEye
+                size={25}
+                style={{
+                  color: "#eac0c1",
+                  marginRight: "20px",
+                  marginTop: "5px",
+                }}
+              />
             ) : (
-              <FaEyeSlash size={25} style={{ color: "#eac0c1",marginRight:"20px" , marginTop: "5px"}} />
+              <FaEyeSlash
+                size={25}
+                style={{
+                  color: "#eac0c1",
+                  marginRight: "20px",
+                  marginTop: "5px",
+                }}
+              />
             )}
           </span>
         </div>

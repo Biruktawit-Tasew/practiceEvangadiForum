@@ -23,13 +23,14 @@
   font-size: 1.2rem;
   font-weight: 500;
   color: #333;
-  margin: 10px 0;
+  margin: 10px 0px;
 }
 
 .questionDescription {
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: #000000;
   font-weight: 500;
+  margin-left: 25px;
 }
 
 /* Answer From The Community Section */
@@ -118,13 +119,14 @@
 .answerContent {
   margin-top: 1rem;
   margin-left: 3rem;
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 .line {
   width: 15%;
-  height: 0.2rem;
-  background-color: red;
+  height: 0.13rem;
+  background-color: #fe6613;
   margin-bottom: 1rem;
+  margin-left: 25px;
 }
 .answerCommunity {
   border-top: 1px solid rgb(188, 186, 186);
@@ -140,11 +142,55 @@
   align-items: start;
   width: 13%;
 }
-
-
-@media (max-width: 768px) {
-   .container {
-  padding: 3rem 2.5rem;
-  width: 85%;
+.answerNotFound {
+  text-align: center;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 20px auto;
+  width: 50%;
+}
+
+.paginationButton {
+  margin: 10px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.paginationButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.answerWrapper {
+  display: flex;
+  flex-direction: column;
+}
+.answerMeta {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+}
+.answerMeta svg {
+  color: var(--old-button-hover-color);
+  margin-right: 0.8rem;
+}
+.answerMeta p {
+  color: rgb(0, 0, 0);
+  font-weight: 200;
+  margin-left: 2.3rem;
+  display: flex;
+  font-size: 0.9rem;
+}
+@media (max-width: 768px) {
+  .container {
+    padding: 3rem 2.5rem;
+    width: 85%;
+  }
 }

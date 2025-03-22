@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoPersonCircleOutline } from "react-icons/io5";
+import { MdOutlineDateRange } from "react-icons/md";
+import { CiShoppingTag } from "react-icons/ci";
 import { IoMdPerson } from "react-icons/io";
 import styles from "./home.module.css"; // Import modular CSS
 import axios from "../../Api/axios";
@@ -16,7 +18,6 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { user } = useContext(AppState);
-  console.log(user);
   useEffect(() => {
     // local storage
 
@@ -60,8 +61,6 @@ const Home = () => {
     indexOfFirstQuestion,
     indexOfLastQuestion
   );
-  console.log(currentQuestions.length);
-  console.log(filteredQuestions.length);
   // Handle search input changes
   const handleSearch = (query) => {
     setSearchQuery(query);
@@ -80,6 +79,28 @@ const Home = () => {
       setCurrentPage(currentPage - 1);
     }
   };
+
+  const getTimeAgo = (timestamp) => {
+    const now = new Date();
+    const createdDate = new Date(timestamp);
+    const timeDifference = now - createdDate; // Difference in milliseconds
+
+    const seconds = Math.floor(timeDifference / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+
+    if (days > 0) {
+      return `${days} day${days === 1 ? "" : "s"} ago`;
+    } else if (hours > 0) {
+      return `${hours} hour${hours === 1 ? "" : "s"} ago`;
+    } else if (minutes > 0) {
+      return `${minutes} minute${minutes === 1 ? "" : "s"} ago`;
+    } else {
+      return `${seconds} second${seconds === 1 ? "" : "s"} ago`;
+    }
+  };
+
   return (
     <div className={styles.container}>
       {/* Welcome User (Top Right) */}
@@ -128,6 +149,18 @@ const Home = () => {
               <div className={styles.questionText}>
                 <p className={styles.questionTitle}>{q.title}</p>
                 <p className={styles.questionDescription}>{q.description}</p>
+                <div className={styles.questionMeta}>
+                  <p>
+                    <MdOutlineDateRange size={20} />
+                    {getTimeAgo(q.created_at)}
+                  </p>
+                  <p>
+                    <CiShoppingTag size={20} />
+                    {q.tag.split(",").map((t)=>(
+                      <span style={{marginRight:"1rem"}}>{t}</span>
+                    ))}
+                  </p>
+                </div>
               </div>
 
               {/* More (Arrow Icon) */}

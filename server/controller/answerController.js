@@ -41,7 +41,7 @@ const getAnswer = async (req, res) => {
   }
   try {
     const [answers] = await dbConnection.query(
-      "SELECT * FROM answers WHERE question_id=?",
+      "SELECT * FROM answers WHERE question_id=? ORDER BY answer_id DESC",
       [question_id]
     );
     if (answers.length == 0) {
@@ -60,14 +60,29 @@ const getAnswer = async (req, res) => {
           "SELECT username FROM registration WHERE user_id=?",
           [userId]
         );
+        const [singleQuestion] = await dbConnection.query(
+          "SELECT title,description FROM questions WHERE question_id=?",
+          [question_id]
+        );
         const username =
           singleUser.length > 0 ? singleUser[0].username : "Unkown User";
         console.log(username);
+        const questionTitle =
+          singleQuestion.length > 0
+            ? singleQuestion[0].title
+            : "No question Found";
+        const questionDesc =
+          singleQuestion.length > 0
+            ? singleQuestion[0].description
+            : "No question Found";
+        //  console.log(username);
         return {
           answer_id: answerId,
           content: content,
           user_name: username,
           created_at: createdAt,
+          title: questionTitle,
+          description: questionDesc,
         };
       })
     );
